@@ -43,6 +43,8 @@ test:
     DATABASE_NAME: app_test
     RACK_ENV: test
     RAILS_ENV: test
+  links:
+    - db
 
 bootstrap:
   <<: *base
