@@ -27,6 +27,7 @@ docker-compose up test
 ```
 
 ## Things done with more time
+- Documentation. Right now the API isnt documented well.
 - Authentication. Currently the app has no authentication scheme. I would build some type of a user model and allow them to auth using tokens.
 - Improve game editing. Right now the team can not be changed after a game is created. This is to prevent dependency errors, IE the user creates a game allocates scores, then changes the team the scores will be lost.
 - Move all public identifiers to some type of a hash based identification

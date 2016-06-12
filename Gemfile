@@ -3,15 +3,17 @@ source 'https://rubygems.org'
 
 gem 'rails', '4.2.6'
 gem 'rails-api'
-
-gem 'spring', :group => :development
-
 gem 'mysql2'
+gem 'active_model_serializers', '~> 0.10.0'
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.4'
   gem 'pry'
   gem 'factory_girl_rails'
+end
+
+group :development do
+  gem 'spring'
 end
 
 group :test do
