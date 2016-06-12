@@ -6,13 +6,16 @@ gem 'rails-api'
 
 gem 'spring', :group => :development
 
-
 gem 'mysql2'
-
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.4'
   gem 'pry'
+  gem 'factory_girl_rails'
+end
+
+group :test do
+  gem 'database_cleaner'
 end
 
 

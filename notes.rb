@@ -1,5 +1,6 @@
 class Game
-  teams: [Team]
+  home_team: Team
+  away_team: Team
   players: through_teams
   innings: [Inning]
 end
@@ -7,7 +8,6 @@ end
 class Team
   name: String
   players: [Player]
-  league: League
 end
 
 class Player
