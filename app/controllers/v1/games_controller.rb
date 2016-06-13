@@ -23,6 +23,8 @@ class V1::GamesController < ApplicationController
     end
   end
 
+  # update left out intentially, not much to update
+
 private
   def game_params
     params.permit(:home_team_id, :away_team_id)
