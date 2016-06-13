@@ -16,7 +16,7 @@ RSpec.describe "Game management", type: :request do
         it { expect(JSON.parse(subject.body)["home_team"]["id"]).to eql(home_team.id) }
         it { expect(JSON.parse(subject.body)["away_team"]["id"]).to eql(away_team.id) }
         it "should display the score"
-        it { expect(subject.code).to eql("201") }
+        it { expect(subject.code).to eql("201") } #Redundant but why delete?
         it { expect{subject}.to change{Game.count}.by(1) }
         it "has correct game ids" do
           subject
