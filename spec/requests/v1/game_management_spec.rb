@@ -1,17 +1,6 @@
 require 'rails_helper'
 
-RSpec.shared_examples "a json response" do
-  it { expect(subject.content_type).to eq("application/json") }
-end
-
-RSpec.describe V1::GamesController, type: :request do
-  let(:headers) do
-    {
-      "ACCEPT" => "application/json",
-      "CONTENT_TYPE" => "application/json"
-    }
-  end
-
+RSpec.describe "Game management", type: :request do
   describe "#create" do
     let(:home_team){ FactoryGirl.create(:team) }
     let(:away_team){ FactoryGirl.create(:team) }
@@ -41,10 +30,12 @@ RSpec.describe V1::GamesController, type: :request do
     describe "incorectly formatted" do
       context "no home_team_id" do
         let(:game_params){ { away_team_id: away_team.id } }
+        it_behaves_like "a json response"
         it { expect(subject.code).to eql("500") }
       end
       context "no away_team_id" do
         let(:game_params){ { home_team_id: home_team.id } }
+        it_behaves_like "a json response"
         it { expect(subject.code).to eql("500") }
       end
     end
@@ -53,8 +44,12 @@ RSpec.describe V1::GamesController, type: :request do
 
   describe "#destroy" do
     let!(:game){ FactoryGirl.create(:game) }
-    subject { delete "/v1/games/#{game.id}", headers }
+    subject do
+      delete "/v1/games/#{game.id}", headers
+      response
+    end
     context "successfully" do
+      it_behaves_like "a json response"
       it { expect{subject}.to change{Game.count}.from(1).to(0) }
       it { expect{subject}.to change{Game.find_by_id(game.id)}.from(game).to(nil) }
       it "should delete all scores associated"
@@ -68,6 +63,7 @@ RSpec.describe V1::GamesController, type: :request do
         get "/v1/games", headers
         response
       end
+      it_behaves_like "a json response"
       it { expect(subject).to have_http_status(:ok) }
       it { expect(JSON.parse(subject.body).map{|game| game["id"]}).to eq game_list.map{|game| game.id} }
     end
@@ -80,7 +76,7 @@ RSpec.describe V1::GamesController, type: :request do
   end
 
   describe "#update" do
-    pending "TODO: Add update features with more time"
+    pending "TODO: Add update features"
   end
 
 end
